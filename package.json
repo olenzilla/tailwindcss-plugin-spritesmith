@@ -1,6 +1,6 @@
 {
   "name": "@olenzilla/tailwindcss-plugin-spritesmith",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Tailwind plugin that generates background-image TailwindCSS utilities from glob'd pattern of image files.",
   "files": [
     "lib/**/*"

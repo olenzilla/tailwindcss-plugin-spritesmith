@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/compare/v1.0.0...v1.1.0) (2023-08-04)
+
+
+### Features
+
+* Add the ability to create height/width utilities ([9b5695e](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/commit/9b5695e0c2f244bd4bce783c7b3ae5474234e462))
+
 # 1.0.0 (2023-08-04)
 
 
