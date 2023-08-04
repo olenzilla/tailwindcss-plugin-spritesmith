@@ -3,11 +3,18 @@ import { join, basename, dirname } from 'path'
 import { memoize } from 'lodash'
 import { glob } from 'glob'
 import { Path } from 'path-scurry'
-import { CSSRuleObject } from 'tailwindcss/types/config'
+import { CSSRuleObject, ThemeConfig } from 'tailwindcss/types/config'
 import Spritesmith from 'spritesmith'
 import { mkdirp } from 'mkdirp'
 import { createHash } from 'crypto'
 import { createReadStream } from 'fs'
+
+declare module 'tailwindcss/types/config' {
+	interface ThemeConfig {
+		spriteWidth: Record<string, string>
+		spriteHeight: Record<string, string>
+	}
+}
 
 type Config = {
 	spritesheets?:
@@ -167,7 +174,7 @@ export default function makeHandler(
 				if (!spriteImages.length) {
 					return lastResult
 				}
-				const result = await lastResult
+				const { utilities, theme } = await lastResult
 
 				const spritesheetCacheDir = join(cacheDir, spritesheetImageHash)
 				const spritesheetResult: Spritesmith.SpritesmithResult =
@@ -253,25 +260,30 @@ export default function makeHandler(
 						if (emitUtilitiesWithExtension) {
 							const nameWithExtension = `sprite-${withExtension}`
 							if (errorOnNameConflict) {
-								if (nameWithExtension in result) {
+								if (nameWithExtension in utilities) {
 									throw new Error(
 										`Sprite utility name conflict! ${nameWithExtension}`,
 									)
 								}
 							}
-							result[nameWithExtension] = utility
+							utilities[nameWithExtension] = utility
 						}
-						{
-							const nameWithoutExtension = `sprite-${withoutExtension}`
-							if (errorOnNameConflict) {
-								if (nameWithoutExtension in result) {
-									throw new Error(
-										`Sprite utility name conflict! ${nameWithoutExtension}`,
-									)
-								}
+						const nameWithoutExtension = `sprite-${withoutExtension}`
+						if (errorOnNameConflict) {
+							if (nameWithoutExtension in utilities) {
+								throw new Error(
+									`Sprite utility name conflict! ${nameWithoutExtension}`,
+								)
 							}
-							result[nameWithoutExtension] = utility
 						}
+						utilities[nameWithoutExtension] = utility
+
+						theme.spriteWidth[nameWithoutExtension] = `${
+							width / pixelDensity
+						}px`
+						theme.spriteHeight[nameWithoutExtension] = `${
+							height / pixelDensity
+						}px`
 					},
 				)
 
@@ -296,9 +308,12 @@ export default function makeHandler(
 					)
 				}
 
-				return result
+				return { utilities, theme }
 			},
-			Promise.resolve({} as CSSRuleObject),
+			Promise.resolve({
+				utilities: <CSSRuleObject>{},
+				theme: <ThemeConfig>{ spriteWidth: {}, spriteHeight: {} },
+			}),
 		)
 
 		const tailwindcssUtilitiesJson = JSON.stringify(utilities, undefined, '\t')
