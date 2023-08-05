@@ -1,6 +1,6 @@
 {
   "name": "@olenzilla/tailwindcss-plugin-spritesmith",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A Tailwind plugin that takes folders of sprite images and uses TailwindCSS and Spritesmith with Webpack or Vite to generate image spritesheets and corresponding sprite classes as Tailwind utilities.",
   "files": [
     "lib/**/*"
