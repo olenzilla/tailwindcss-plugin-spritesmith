@@ -91,7 +91,7 @@ export default function makeHandler(
 							await glob(spritesDirGlob, { withFileTypes: true })
 						).flatMap((spritesDir) => {
 							if (spritesDir.isDirectory()) {
-								return (extensions ?? ['png', 'jpg']).map(
+								return (extensions ?? ['png', 'jpg', 'jpeg', 'webp']).map(
 									function (ext): SpritesheetConfig {
 										return {
 											spriteImageGlob: join(
@@ -135,7 +135,7 @@ export default function makeHandler(
 							hash.update(image)
 							return hash
 						},
-						await hashFileContents(hash, ...spriteImages),
+						await hashFiles(hash, ...spriteImages),
 					)
 					.digest('hex')
 				result[outputImage] = {
@@ -198,6 +198,15 @@ export default function makeHandler(
 								Spritesmith.run(
 									{
 										...spritesmithOptions,
+										exportOpts: {
+											...(spritesmithOptions?.exportOpts ?? {}),
+											format: outputImage.match(/\.(png|jpe?g|webp)$/)?.[1] as
+												| 'png'
+												| 'jpg'
+												| 'jpeg'
+												| 'webp'
+												| undefined,
+										},
 										src: spriteImages,
 									},
 									async function (err, result) {
@@ -287,21 +296,14 @@ export default function makeHandler(
 					},
 				)
 
-				if (existsSync(outputImage)) {
-					if (
-						!cacheDir &&
-						(await hashFileContents(undefined, outputImage)) !=
-							(await hashFileContents(
-								undefined,
-								join(spritesheetCacheDir, 'image'),
-							))
-					) {
-						await new Promise((resolve) => rm(outputImage, resolve))
-					}
-				} else {
+				if (!existsSync(outputImage)) {
 					await mkdirp(dirname(outputImage))
 				}
-				if (!existsSync(outputImage)) {
+				if (
+					!existsSync(outputImage) ||
+					(await hashFileContents(await readFile(outputImage))) !=
+						(await hashFileContents(spritesheetResult.image))
+				) {
 					await writeFile(
 						outputImage,
 						spritesheetResult.image as unknown as Buffer,
@@ -350,7 +352,7 @@ function logAndReturn<T>(val: T, ...logArgs: any[]) {
 
 type PromiseType<T> = T extends Promise<infer U> ? U : T
 
-async function hashFileContents(hash = createHash('sha1'), ...files: string[]) {
+async function hashFiles(hash = createHash('sha1'), ...files: string[]) {
 	await files.reduce(async (lastResult, file) => {
 		await lastResult
 		return new Promise<void>(function (resolve, reject) {
@@ -375,4 +377,11 @@ async function hashFileContents(hash = createHash('sha1'), ...files: string[]) {
 		})
 	}, Promise.resolve())
 	return hash
+}
+async function hashFileContents(...files: Buffer[]) {
+	const hash = createHash('sha1')
+	for (const file of files) {
+		hash.update(file)
+	}
+	return hash.digest('hex')
 }
