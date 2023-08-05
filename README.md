@@ -2,7 +2,7 @@
 
 [![NPM](https://nodei.co/npm/@olenzilla/tailwindcss-plugin-spritesmith.png)](https://npmjs.com/package/@olenzilla/tailwindcss-plugin-spritesmith)
 
-A TailwindCSS plugin for creating spritesheets using Webpack or Vite that, thanks to using TailwindCSS, are:
+A Tailwind plugin that takes folders of sprite images and uses TailwindCSS and Spritesmith with Webpack or Vite to generate image spritesheets and corresponding sprite classes as Tailwind utilities.
 
 - [Features \& Highlights](#features--highlights)
 - [Webpack](#webpack)
@@ -232,4 +232,4 @@ module.exports = {
 
 ## Acknowledgements
 
-Thanks to [@evont](https://github.com/evont) for [vite-plugin-spritesmith](https://github.com/evont/vite-plugin-spritesmith) and of course [@twolfson](https://github.com/twolfson) for [spritesmith](https://github.com/twolfson/spritesmith)
+Thanks to [@evont](https://github.com/evont) for [vite-plugin-spritesmith](https://github.com/evont/vite-plugin-spritesmith) and of course [@twolfson](https://github.com/twolfson) for [spritesmith](https://github.com/twolfson/spritesmith) and [@mixtur](https://github.com/mixtur) for [webpack-spritesmith](https://github.com/mixtur/webpack-spritesmith)!

@@ -1,7 +1,7 @@
 {
   "name": "@olenzilla/tailwindcss-plugin-spritesmith",
   "version": "1.1.1",
-  "description": "A Tailwind plugin that uses TailwindCSS and Spritesmith to generate image spritesheets and corresponding styles as Tailwind utilities from folders of images.",
+  "description": "A Tailwind plugin that takes folders of sprite images and uses TailwindCSS and Spritesmith with Webpack or Vite to generate image spritesheets and corresponding sprite classes as Tailwind utilities.",
   "files": [
     "lib/**/*"
   ],
@@ -64,23 +64,26 @@
     "url": "https://github.com/olenzilla/tailwindcss-plugin-spritesmith.git"
   },
   "keywords": [
-    "tailwind",
-    "tailwindcss",
-    "spritesmith",
-    "image",
-    "sprite",
-    "spritesheet",
-    "bg-images",
     "background-image",
+    "css",
+    "gatsby",
+    "image",
+    "mixtur",
+    "next",
+    "nuxt",
+    "olenzilla",
     "plugin",
     "postcss",
-    "css",
     "react",
-    "gatsby",
-    "next",
-    "vue",
+    "sprite",
+    "spritesheet",
+    "spritesmith",
+    "tailwind",
+    "tailwindcss",
+    "twolfson",
     "vite",
-    "nuxt"
+    "vue",
+    "webpack"
   ],
   "author": "Olen Davis",
   "license": "ISC",
