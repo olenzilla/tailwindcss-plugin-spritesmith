@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/compare/v1.1.0...v1.1.1) (2023-08-05)
+
+
+### Bug Fixes
+
+* **docs:** Fix package description and keywords ([47700fe](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/commit/47700fe2096e721b15792685bf846831dcae3ce3))
+
 # [1.1.0](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/compare/v1.0.0...v1.1.0) (2023-08-04)
 
 
