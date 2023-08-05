@@ -1,3 +1,11 @@
+## [1.1.3](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/compare/v1.1.2...v1.1.3) (2023-08-05)
+
+
+### Bug Fixes
+
+* Overwrite an existing outputImage even when cached ([ac06da2](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/commit/ac06da2a03df0c09ebcec3c68c114644068fda91))
+* **vite:** Fix docs & update vite plugin due to limitations ([a369c00](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/commit/a369c00e93876d1788bcd9a4e61e701ee7fa5e67))
+
 ## [1.1.2](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/compare/v1.1.1...v1.1.2) (2023-08-05)
 
 
