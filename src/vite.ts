@@ -5,15 +5,9 @@ export default function vite(...args: Parameters<typeof makeHandler>) {
 	const handler = makeHandler(...args)
 
 	const plugin: Plugin = {
-		name: 'tailwindcss-spritesmith',
-		watchChange: {
-			sequential: true,
-			handler,
-		},
-		buildStart: {
-			sequential: true,
-			handler,
-		},
+		name: 'tailwindcss-plugin-spritesmith',
+		watchChange: handler,
+		buildStart: handler,
 	}
 	return plugin
 }

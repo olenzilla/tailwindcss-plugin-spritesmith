@@ -172,13 +172,21 @@ Then pass the file the Vite plugin creates to the corresponding TailwindCSS plug
 module.exports = {
 	// ...
 	plugins: [
-		require('@olenzilla/tailwindcss-plugin-spritesmith').tailwind(
-			require('./tailwindcss-spritesmith-utilities.json'),
-		),
+		(function () {
+			try {
+				return require('@olenzilla/tailwindcss-plugin-spritesmith').tailwind(
+					require('./.cache/tailwindcss-spritesmith-utilities.json'),
+				)
+			} catch (e) {
+				return {}
+			}
+		})(),
 		// ...
 	],
 }
 ```
+
+Note that we have less control over when exactly the Vite plugin runs relative to the tailwind plugin in things like NuxtJS, so it's important to write it this way to allow the .json file to not exist initially, and then automatically rebuild once it does.
 
 ### Ideal Usage, Vite
 
@@ -222,13 +230,21 @@ And the same `tailwind.config.js` as before:
 module.exports = {
 	// ...
 	plugins: [
-		require('@olenzilla/tailwindcss-plugin-spritesmith').tailwind(
-			require('./tailwindcss-spritesmith-utilities.json'),
-		),
+		(function () {
+			try {
+				return require('@olenzilla/tailwindcss-plugin-spritesmith').tailwind(
+					require('./.cache/tailwindcss-spritesmith-utilities.json'),
+				)
+			} catch (e) {
+				return {}
+			}
+		})(),
 		// ...
 	],
 }
 ```
+
+Note that we have less control over when exactly the Vite plugin runs relative to the tailwind plugin in things like NuxtJS, so it's important to write it this way to allow the .json file to not exist initially, and then automatically rebuild once it does.
 
 ## Acknowledgements
 
