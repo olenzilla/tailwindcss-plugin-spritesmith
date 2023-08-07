@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/compare/v1.1.3...v1.1.4) (2023-08-07)
+
+
+### Bug Fixes
+
+* Fix NaN error when sprite is full width or height ([f8fa993](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/commit/f8fa993597eb253da53725b59090d3adea5476e4))
+
 ## [1.1.3](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/compare/v1.1.2...v1.1.3) (2023-08-05)
 
 
