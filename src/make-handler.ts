@@ -67,7 +67,7 @@ export default function makeHandler(
 		errorOnNameConflict,
 		cacheDir = '.cache/tailwind-plugin-spritesmith',
 		pixelDensity: defaultPixelDensity = 1,
-		spritesmithOptions = { padding: 2 },
+		spritesmithOptions = {},
 	} = config ?? {}
 
 	async function getSpritesheetConfigs() {
@@ -197,8 +197,10 @@ export default function makeHandler(
 						: await new Promise(async (resolve, reject) =>
 								Spritesmith.run(
 									{
+										padding: 2,
 										...spritesmithOptions,
 										exportOpts: {
+											quality: 100,
 											...(spritesmithOptions?.exportOpts ?? {}),
 											format: outputImage.match(/\.(png|jpe?g|webp)$/)?.[1] as
 												| 'png'
@@ -246,9 +248,13 @@ export default function makeHandler(
 							'&': {
 								backgroundImage,
 								backgroundPosition: `${
-									(x / (spritesheetResult.properties.width - width)) * 100
+									(width < spritesheetResult.properties.width
+										? x / (spritesheetResult.properties.width - width)
+										: 0) * 100
 								}% ${
-									(y / (spritesheetResult.properties.height - height)) * 100
+									(height < spritesheetResult.properties.height
+										? y / (spritesheetResult.properties.height - height)
+										: 0) * 100
 								}%`,
 								backgroundSize: `${
 									(spritesheetResult.properties.width / width) * 100
