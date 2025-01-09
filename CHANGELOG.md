@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/compare/v1.1.4...v1.1.5) (2025-01-09)
+
+
+### Bug Fixes
+
+* correct the .mjs outputs for ESM consumers ([0b31250](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/commit/0b31250516586132f884fbdc54292314147b3ad7))
+
 ## [1.1.4](https://github.com/olenzilla/tailwindcss-plugin-spritesmith/compare/v1.1.3...v1.1.4) (2023-08-07)
 
 
