@@ -1,6 +1,8 @@
-import { existsSync, writeFile, rm, readFile } from 'fs-extra'
+import fsExtra from 'fs-extra'
+const { existsSync, writeFile, rm, readFile } = fsExtra
 import { join, basename, dirname } from 'path'
-import { memoize } from 'lodash'
+import lodash from 'lodash'
+const { memoize } = lodash
 import { glob } from 'glob'
 import { Path } from 'path-scurry'
 import { CSSRuleObject, ThemeConfig } from 'tailwindcss/types/config'
